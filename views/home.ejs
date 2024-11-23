@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Short URL Service</title>
+</head>
+<body>
+  <h1>Shortened URLs</h1>
+
+  <form action="/url" method="POST">
+    <input type="url" name="url" placeholder="Enter your URL" required />
+    <button type="submit">Shorten</button>
+  </form>
+
+  <h2>All URLs</h2>
+  <ul>
+    <% urls.forEach(url => { %>
+      <li>
+        <a href="<%= url.redirectUrl %>" target="_blank"><%= url.redirectUrl %></a>
+        - Short ID: <%= url.shortId %>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

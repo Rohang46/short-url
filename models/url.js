@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const urlSchema = new mongoose.Schema(
   {
@@ -10,14 +10,18 @@ const urlSchema = new mongoose.Schema(
     redirectUrl: {
       type: String,
       required: true,
+      match: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/, // Basic URL validation
     },
-    visitHistory: [{ timestamp: { type: Number } }],
+    visitHistory: {
+      type: [{ timestamp: { type: Number } }],
+      default: [],
+    },
   },
   {
-    timestamps: true, // Corrected option name
+    timestamps: true, // Automatically adds createdAt and updatedAt fields
   }
 );
 
-const URL = mongoose.model("url", urlSchema);
+const URL = mongoose.model("URL", urlSchema);
 
 module.exports = URL;
